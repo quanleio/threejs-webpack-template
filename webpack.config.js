@@ -5,6 +5,7 @@ const path = require('path');
 module.exports = {
   mode: "development",
   name: "threejs-webpack-template",
+  devtool: 'eval-source-map',
   entry: {
     app: ["./src/index.js"],
   },
