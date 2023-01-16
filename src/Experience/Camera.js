@@ -1,8 +1,6 @@
 import * as THREE from "three"
-import { gsap } from 'gsap'
 import Experience from "./Experience.js"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import {EVT} from '../utils/contains'
 
 export default class Camera {
   constructor() {
