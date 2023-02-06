@@ -1,7 +1,5 @@
 import * as THREE from 'three'
 import Experience from '../Experience';
-import vertexShader from '../../shaders/temp.vert'
-import fragmentShader from '../../shaders/temp.frag'
 
 export default class PlaneToy {
   constructor() {
@@ -12,14 +10,7 @@ export default class PlaneToy {
   }
   setPlaneToy = () => {
     const geometry = new THREE.PlaneGeometry(1, 1, )
-
-    const material = new THREE.ShaderMaterial({
-      uniforms: this.uniforms,
-      vertexShader: vertexShader,
-      fragmentShader: fragmentShader,
-      side: THREE.DoubleSide,
-    })
-
+    const material = new THREE.MeshBasicMaterial()
     const plane = new THREE.Mesh(geometry, material)
 
     plane.scale.setScalar(10)
