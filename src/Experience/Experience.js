@@ -1,16 +1,16 @@
 import * as THREE from "three"
 import Sizes from "../utils/Sizes.js"
-import Time from "../utils/Time.js"
+// import Time from "../utils/Time.js"
 import Camera from "./Camera.js"
 import Renderer from "./Renderer.js"
 import World from "./World/World.js"
 import Resources from "../utils/Resources.js"
 import Stats from "../utils/Stats.js"
-
 import sources from "./sources.js"
 import Environment from './Environment'
 import Mouse from '../utils/Mouse';
 import Debug from '../utils/Debug';
+import PostEffect from './PostEffect';
 
 let instance = null
 
@@ -35,7 +35,7 @@ export default class Experience {
     this.debug = new Debug()
     this.stats = new Stats()
     this.sizes = new Sizes()
-    this.time = new Time()
+    // this.time = new Time()
     this.mouse = new Mouse()
     this.resources = new Resources(sources)
 
@@ -43,15 +43,18 @@ export default class Experience {
     this.environment = new Environment()
     this.camera = new Camera()
     this.renderer = new Renderer()
+    // this.postEffect = new PostEffect()
     this.world = new World()
 
     this.sizes.on("resize", () => this.resize())
-    this.time.on("tick", () => this.update())
+    // this.time.on("tick", () => this.update())
+    this.tick()
   }
 
   resize() {
     this.camera.resize()
     this.renderer.resize()
+    // this.postEffect.resize()
   }
 
   update() {
@@ -61,16 +64,22 @@ export default class Experience {
     /**update everything */
     this.camera.update()
     this.world.update()
-    this.renderer.update()
+    this.renderer.update() // Don't use this if using PostProcessing
+    // if (this.postEffect) this.postEffect.update()
 
     /**Finish analyzing frame */
     this.stats.active && this.stats.afterRender()
   }
 
+  tick = () => {
+    requestAnimationFrame( this.tick )
+    this.update()
+  }
+
   destroy() {
     /**Clear Event Emitter*/
     this.sizes.off("resize")
-    this.time.off("tick")
+    // this.time.off("tick")
 
     /**Traverse the whole scene and check if it's a mesh */
     this.scene.traverse((child) => {

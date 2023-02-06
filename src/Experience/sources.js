@@ -9,4 +9,9 @@ export default [
     type: "gltfModel",
     path: "assets/models/Fox/glTF/Fox.gltf",
   },
+  {
+    name: "greynoise",
+    type: "texture",
+    path: "assets/textures/greynoise.png",
+  },
 ];

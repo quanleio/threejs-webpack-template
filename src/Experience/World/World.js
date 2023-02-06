@@ -1,8 +1,5 @@
 import Experience from "../Experience.js"
 import Fox from './Fox';
-// import vertexShader from '../../shaders/temp.vert'
-// import fragmentShader from '../../shaders/temp.frag'
-
 export default class World {
   constructor() {
     this.experience = new Experience()

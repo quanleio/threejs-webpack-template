@@ -1,11 +1,12 @@
-uniform float time;
 varying vec2 vUv;
-varying vec2 vPosition;
-uniform sampler2D texture;
 
 void main() {
     vUv = uv;
-    vec4 mvPoisition = modelViewMatrix * vec4( position, 1.);
-    gl_PointSize = 30. * ( 1. / -mvPoisition.z);
-    gl_Position = projectionMatrix * mvPoisition;
+
+    // position: local position of 1 vertex
+    // modelViewMatrix: object's world position from camera
+    // mvPosition: world position of 1 vertex
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+
+    gl_Position = projectionMatrix * mvPosition; // for 1 vertex
 }

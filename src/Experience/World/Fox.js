@@ -9,7 +9,8 @@ export default class Fox {
     this.targetMouse = this.experience.mouse.targetMouse
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
-    this.time = this.experience.time
+    // this.time = this.experience.time
+    this.clock = new THREE.Clock()
 
     // Debug
     if (this.debug.active) {
@@ -90,7 +91,8 @@ export default class Fox {
   }
 
   update() {
-    this.animation.mixer.update(this.time.delta * 0.001);
+    // this.animation.mixer.update(this.time.delta * 0.001);
+    this.animation.mixer.update(this.clock.getDelta());
 
     this.mouse.x = THREE.MathUtils.lerp(this.mouse.x, this.targetMouse.x, 0.1)
     this.mouse.y = THREE.MathUtils.lerp(this.mouse.y, this.targetMouse.y, 0.1)
