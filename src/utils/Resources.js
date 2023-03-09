@@ -5,8 +5,8 @@ import { KTX2Loader } from 'three/addons/loaders/KTX2Loader'
 import { OBJLoader } from 'three/addons/loaders/OBJLoader'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader'
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module'
-import EventEmitter from "./EventEmitter.js"
 import Experience from '../Experience/Experience';
+import EventEmitter from "./EventEmitter.js"
 
 export default class Resources extends EventEmitter {
   constructor(sources) {

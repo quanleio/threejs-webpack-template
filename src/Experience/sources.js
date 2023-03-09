@@ -3,13 +3,13 @@ export default [
     name: "testMatcap",
     type: "texture",
     path: "assets/textures/matcap.png",
-    source: ""
+    source: "https://opengameart.org/content/fox-and-shiba"
   },
   {
     name: "foxModel",
     type: "gltfModel",
     path: "assets/models/Fox/glTF/Fox.gltf",
-    source: ""
+    source: "https://opengameart.org/content/fox-and-shiba"
   },
   {
     name: "greynoise",

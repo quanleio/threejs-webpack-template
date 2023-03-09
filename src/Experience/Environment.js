@@ -14,8 +14,10 @@ export default class Environment {
   }
   setEnv = () => {
     // this.scene.background = new THREE.Color(0xa5c9a5)
+
+    const texture = this.resources.items.royal_esplanade
+    texture.mapping = THREE.EquirectangularReflectionMapping
+    this.scene.environment = texture
   }
-  update = () => {
-    this.experience.update()
-  }
+  update = () => {}
 }

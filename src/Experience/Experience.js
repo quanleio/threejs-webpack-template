@@ -42,7 +42,7 @@ export default class Experience {
     this.scene = new THREE.Scene()
     this.camera = new Camera()
     this.renderer = new Renderer()
-    this.resources = new Resources(sources) // resources need renderer
+    this.resources = new Resources(sources) // resources need renderer for meshopt
     this.environment = new Environment()
     this.world = new World()
     // this.postEffect = new PostEffect()
