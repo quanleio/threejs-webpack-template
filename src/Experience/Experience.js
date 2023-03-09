@@ -78,6 +78,58 @@ export default class Experience {
     this.update()
   }
 
+  /**
+   * Traverse the whole {resource} and clean up
+   * geometry, material, texture, uniforms and skeleton.
+   * @param resource
+   */
+  dispose = resource => {
+    if (resource instanceof THREE.Object3D) {
+
+      resource.traverse(child => {
+
+        // If object is type of SkinnedMesh
+        if (child.isSkinnedMesh) {
+          child.skeleton.dispose()
+        }
+
+        // geometry
+        if (child.geometry) child.geometry.dispose()
+
+        // material
+        if (child.material) {
+
+          // We have to check if there are any textures on the material
+          for (const value of Object.values(child.material)) {
+            if (value instanceof THREE.Texture) {
+              value.dispose()
+            }
+          }
+
+          // We also have to check if any uniforms reference textures or arrays of textures
+          if (child.material.uniforms) {
+            for (const value of Object.values(child.material.uniforms)) {
+              if (value) {
+                const uniformValue = value.value;
+                // if (uniformValue instanceof THREE.Texture || Array.isArray(uniformValue)) {
+                if (uniformValue instanceof THREE.Texture ) {
+                  uniformValue.dispose()
+                }
+              }
+            }
+          }
+
+          // Dispose texture
+          child.material.dispose()
+        }
+      })
+    }
+
+    // remove resource
+    this.scene.remove(resource)
+    console.info(this.renderer.instance.info)
+  }
+
   destroy() {
     /**Clear Event Emitter*/
     this.sizes.off("resize")
