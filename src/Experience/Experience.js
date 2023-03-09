@@ -11,6 +11,7 @@ import Environment from './Environment'
 import Mouse from '../utils/Mouse';
 import Debug from '../utils/Debug';
 import PostEffect from './PostEffect';
+import Ray from './Ray';
 
 let instance = null
 
@@ -37,14 +38,15 @@ export default class Experience {
     this.sizes = new Sizes()
     // this.time = new Time()
     this.mouse = new Mouse()
-    this.resources = new Resources(sources)
 
     this.scene = new THREE.Scene()
-    this.environment = new Environment()
     this.camera = new Camera()
     this.renderer = new Renderer()
-    // this.postEffect = new PostEffect()
+    this.resources = new Resources(sources) // resources need renderer
+    this.environment = new Environment()
     this.world = new World()
+    // this.postEffect = new PostEffect()
+    this.ray = new Ray(this.camera, this.scene)
 
     this.sizes.on("resize", () => this.resize())
     // this.time.on("tick", () => this.update())

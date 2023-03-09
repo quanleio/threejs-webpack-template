@@ -4,8 +4,8 @@
 
 ## Description
 
-- Three.js : [v149](https://unpkg.com/browse/three@0.149.0/)
-- DRACO Decoder: [v149](https://unpkg.com/browse/three@0.149.0/examples/jsm/libs/draco/)
+- Three.js : [v150](https://unpkg.com/browse/three@0.150.1/)
+- DRACO Decoder: [v150](https://unpkg.com/browse/three@0.150.1/examples/jsm/libs/draco/)
 - Load GLSL with [glslify](https://github.com/glslify/glslify)
 - GUI Debug
 - Play GLB model animation.
