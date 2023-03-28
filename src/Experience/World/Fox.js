@@ -12,7 +12,6 @@ export default class Fox {
     this.clock = new THREE.Clock()
 
     this.setModel()
-    // this.setAnimation()
     this.setFooter()
     // this.setDebug()
   }
@@ -56,10 +55,14 @@ export default class Fox {
         playWalking: () => {
           this.animation.play('walk')
         },
+        stop: () => {
+          this.animation.mixer.stopAllAction()
+        },
       }
       debugFolder.add(debugObject, "playRun")
       debugFolder.add(debugObject, "playSurvey")
       debugFolder.add(debugObject, "playWalking")
+      debugFolder.add(debugObject, "stop")
     }
   }
 
@@ -67,10 +70,9 @@ export default class Fox {
     /*this.foxModel = this.resources.items.foxModel
 
     const model = this.foxModel.scene
-    model.position.set(0, -1.5, 0)
-    model.translateY(-2)
-    model.rotation.set(0, Math.PI/180 * -60, 0)
-    model.scale.setScalar(0.06)
+    model.position.set(0, -0.5, 0)
+    model.rotation.set(0, Math.PI/180 * -80, 0)
+    model.scale.setScalar(0.02)
     this.scene.add(model)
 
     // material
@@ -80,7 +82,10 @@ export default class Fox {
 
     model.traverse(child => {
       if (child.material) child.material = this.material
-    })*/
+    })
+
+    this.setAnimation()
+    */
 
     const model = this.resources.items.helmet.scene
     this.scene.add(model)
