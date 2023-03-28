@@ -12,6 +12,12 @@ export default [
     source: "https://opengameart.org/content/fox-and-shiba"
   },
   {
+    name: "helmet",
+    type: "gltfModel",
+    path: "assets/models/DamagedHelmet-v1.glb",
+    source: "https://threejs.org/"
+  },
+  {
     name: "greynoise",
     type: "texture",
     path: "assets/textures/greynoise.png",

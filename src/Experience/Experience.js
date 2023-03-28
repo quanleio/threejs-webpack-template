@@ -25,38 +25,50 @@ export default class Experience {
 
     /**Global Access */
     window.experience = this
+    this.isPostRender = false // not using post-processing by default
 
     /**Canvas*/
-    const _canvas = document.createElement("canvas")
-    _canvas.id = 'experience'
-    document.body.appendChild(_canvas)
-    this.canvas = _canvas
+    this.initDOM()
+    this.canvas = document.querySelector('#experience')
+    console.log(`THREE.REVISION: ${THREE.REVISION}`)
 
     /**Setup Classes */
     this.debug = new Debug()
     this.stats = new Stats()
     this.sizes = new Sizes()
     // this.time = new Time()
-    this.mouse = new Mouse()
+    // this.mouse = new Mouse()
 
     this.scene = new THREE.Scene()
     this.camera = new Camera()
     this.renderer = new Renderer()
     this.resources = new Resources(sources) // resources need renderer for meshopt
-    this.environment = new Environment()
+    new Environment()
     this.world = new World()
-    // this.postEffect = new PostEffect()
-    this.ray = new Ray(this.camera, this.scene)
+    this.postEffect = new PostEffect()
+    // this.ray = new Ray(this.camera, this.scene)
 
     this.sizes.on("resize", () => this.resize())
     // this.time.on("tick", () => this.update())
     this.tick()
   }
 
+  initDOM = () => {
+    // canvas
+    const _canvas = document.createElement("canvas")
+    _canvas.id = 'experience'
+    document.body.appendChild(_canvas)
+
+    const footer = document.createElement("div")
+    footer.classList.add('footer')
+    footer.id = 'footer'
+    document.body.appendChild(footer)
+  }
+
   resize() {
     this.camera.resize()
     this.renderer.resize()
-    // this.postEffect.resize()
+    this.postEffect.resize()
   }
 
   update() {
@@ -66,8 +78,8 @@ export default class Experience {
     /**update everything */
     this.camera.update()
     this.world.update()
-    this.renderer.update() // Don't use this if using PostProcessing
-    // if (this.postEffect) this.postEffect.update()
+    // Don't update this.renderer if using PostProcessing
+    this.isPostRender ? this.postEffect.update() : this.renderer.update()
 
     /**Finish analyzing frame */
     this.stats.active && this.stats.afterRender()

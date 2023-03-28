@@ -33,7 +33,7 @@ export default class Resources extends EventEmitter {
 
     // gltf
     this.loaders.gltfLoader = new GLTFLoader()
-    this.loaders.gltfLoader.setMeshoptDecoder(MeshoptDecoder)
+    // this.loaders.gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
     // draco
     const dracoLoader = new DRACOLoader()
@@ -42,10 +42,10 @@ export default class Resources extends EventEmitter {
     this.loaders.gltfLoader.setDRACOLoader( dracoLoader )
 
     // ktx2 for meshopt
-    const ktx2Loader = new KTX2Loader()
-    ktx2Loader.setTranscoderPath('/vendor/basis/')
-    ktx2Loader.detectSupport(this.renderer)
-    this.loaders.gltfLoader.setKTX2Loader(ktx2Loader)
+    // const ktx2Loader = new KTX2Loader()
+    // ktx2Loader.setTranscoderPath('/vendor/basis/')
+    // ktx2Loader.detectSupport(this.renderer)
+    // this.loaders.gltfLoader.setKTX2Loader(ktx2Loader)
 
     // another loaders
     this.loaders.objLoader = new OBJLoader()
