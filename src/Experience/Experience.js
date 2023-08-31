@@ -1,4 +1,4 @@
-import * as THREE from "three"
+import {Mesh, Object3D, REVISION, Scene, Texture} from 'three';
 import Sizes from "../utils/Sizes.js"
 // import Time from "../utils/Time.js"
 import Camera from "./Camera.js"
@@ -28,9 +28,8 @@ export default class Experience {
     this.isPostRender = false // not using post-processing by default
 
     /**Canvas*/
-    this.initDOM()
     this.canvas = document.querySelector('#experience')
-    console.log(`THREE.REVISION: ${THREE.REVISION}`)
+    console.log(`THREE REVISION: ${REVISION}`)
 
     /**Setup Classes */
     this.debug = new Debug()
@@ -39,7 +38,7 @@ export default class Experience {
     // this.time = new Time()
     // this.mouse = new Mouse()
 
-    this.scene = new THREE.Scene()
+    this.scene = new Scene()
     this.camera = new Camera()
     this.renderer = new Renderer()
     this.resources = new Resources(sources) // resources need renderer for meshopt
@@ -96,7 +95,7 @@ export default class Experience {
    * @param resource
    */
   dispose = resource => {
-    if (resource instanceof THREE.Object3D) {
+    if (resource instanceof Object3D) {
 
       resource.traverse(child => {
 
@@ -113,7 +112,7 @@ export default class Experience {
 
           // We have to check if there are any textures on the material
           for (const value of Object.values(child.material)) {
-            if (value instanceof THREE.Texture) {
+            if (value instanceof Texture) {
               value.dispose()
             }
           }
@@ -123,8 +122,8 @@ export default class Experience {
             for (const value of Object.values(child.material.uniforms)) {
               if (value) {
                 const uniformValue = value.value;
-                // if (uniformValue instanceof THREE.Texture || Array.isArray(uniformValue)) {
-                if (uniformValue instanceof THREE.Texture ) {
+                // if (uniformValue instanceof Texture || Array.isArray(uniformValue)) {
+                if (uniformValue instanceof Texture ) {
                   uniformValue.dispose()
                 }
               }
@@ -149,7 +148,7 @@ export default class Experience {
 
     /**Traverse the whole scene and check if it's a mesh */
     this.scene.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
+      if (child instanceof Mesh) {
         child.geometry.dispose()
 
         /**Loop through the material properties */

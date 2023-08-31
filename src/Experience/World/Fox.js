@@ -1,4 +1,4 @@
-import * as THREE from "three"
+import { AnimationMixer, Clock } from 'three';
 import Experience from "../Experience.js"
 
 export default class Fox {
@@ -9,33 +9,10 @@ export default class Fox {
     // this.targetMouse = this.experience.mouse.targetMouse
     this.resources = this.experience.resources
     this.debug = this.experience.debug
-    this.clock = new THREE.Clock()
+    this.clock = new Clock()
 
     this.setModel()
-    this.setFooter()
-    // this.setDebug()
-  }
-
-  /**
-   * Insert DOMElement in the footer
-   */
-  setFooter = () => {
-    const footer = document.getElementById('footer')
-
-    const title = document.createElement('p')
-    title.classList.add('title')
-    title.innerHTML = 'Play model animations.'
-    // footer.appendChild(title)
-
-    const info = document.createElement('p')
-    info.innerHTML = 'USE DEBUG MODE (#debug) FOR TESTING'
-    footer.appendChild(info)
-
-    const link = document.createElement('p')
-    link.innerHTML = 'Models: ' +
-        '<a href="https://opengameart.org/content/fox-and-shiba" target="blank">Fox and Shiba</a>, ' +
-        '<a href="https://threejs.org/" target="blank">DamagedHelmet</a> '
-    footer.appendChild(link)
+    this.setDebug()
   }
 
   /**
@@ -76,7 +53,7 @@ export default class Fox {
     this.scene.add(model)
 
     // material
-    this.material = new THREE.MeshMatcapMaterial({
+    this.material = new MeshMatcapMaterial({
       matcap: this.resources.items.testMatcap,
     })
 
@@ -95,7 +72,7 @@ export default class Fox {
     this.animation = {}
 
     // Mixer
-    this.animation.mixer = new THREE.AnimationMixer(this.foxModel.scene)
+    this.animation.mixer = new AnimationMixer(this.foxModel.scene)
 
     // Actions
     this.animation.actions = {}
@@ -124,8 +101,8 @@ export default class Fox {
     // this.animation.mixer.update(this.time.delta * 0.001)
     if(this.animation) this.animation.mixer.update(this.clock.getDelta())
 
-    // this.mouse.x = THREE.MathUtils.lerp(this.mouse.x, this.targetMouse.x, 0.1)
-    // this.mouse.y = THREE.MathUtils.lerp(this.mouse.y, this.targetMouse.y, 0.1)
-    // this.model.rotation.y = THREE.MathUtils.degToRad(20 * this.mouse.x)
+    // this.mouse.x = MathUtils.lerp(this.mouse.x, this.targetMouse.x, 0.1)
+    // this.mouse.y = MathUtils.lerp(this.mouse.y, this.targetMouse.y, 0.1)
+    // this.model.rotation.y = MathUtils.degToRad(20 * this.mouse.x)
   }
 }

@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import {Vector2} from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
@@ -8,6 +8,7 @@ import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShade
 import { ColorCorrectionShader } from 'three/addons/shaders/ColorCorrectionShader';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass';
 import Experience from './Experience'
+
 export default class PostEffect {
   constructor() {
     this.experience = new Experience()
@@ -45,7 +46,7 @@ export default class PostEffect {
     effectColorPass.uniforms.mulRGB.value.set(1.1, 1.1, 1.1);
 
     const bloomPass = new UnrealBloomPass(
-        new THREE.Vector2(window.innerWidth, window.innerHeight),
+        new Vector2(window.innerWidth, window.innerHeight),
         1.5,
         0.4,
         0.85

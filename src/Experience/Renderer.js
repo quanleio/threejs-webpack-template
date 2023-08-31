@@ -1,4 +1,10 @@
-import * as THREE from "three"
+import {
+  ACESFilmicToneMapping,
+  CineonToneMapping, CustomToneMapping,
+  LinearToneMapping,
+  NoToneMapping,
+  ReinhardToneMapping, SRGBColorSpace, WebGLRenderer,
+} from 'three';
 import Experience from "./Experience.js"
 
 export default class Renderer {
@@ -13,16 +19,15 @@ export default class Renderer {
     this.params = {
       exposure: 1.0,
       toneMapping: 'None',
-      useLegacyLights: true
     }
     this.guiExposure = null
     this.toneMappingOptions = {
-      None: THREE.NoToneMapping,
-      Linear: THREE.LinearToneMapping,
-      Reinhard: THREE.ReinhardToneMapping,
-      Cineon: THREE.CineonToneMapping,
-      ACESFilmic: THREE.ACESFilmicToneMapping,
-      Custom: THREE.CustomToneMapping
+      None: NoToneMapping,
+      Linear: LinearToneMapping,
+      Reinhard: ReinhardToneMapping,
+      Cineon: CineonToneMapping,
+      ACESFilmic: ACESFilmicToneMapping,
+      Custom: CustomToneMapping
     }
 
     this.setInstance()
@@ -48,21 +53,16 @@ export default class Renderer {
         })
       }
     })
-
-    debugFolder.add(this.params, 'useLegacyLights').onChange(val => {
-      this.instance.useLegacyLights = this.params.useLegacyLights
-    })
   }
 
   setInstance() {
-    this.instance = new THREE.WebGLRenderer({
+    this.instance = new WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
     })
 
     // this.instance.setClearColor(0x262626, 1)
-    this.instance.useLegacyLights = this.params.useLegacyLights
-    this.instance.outputEncoding = THREE.sRGBEncoding
+    this.instance.outputColorSpace = SRGBColorSpace
     this.instance.toneMapping = this.toneMappingOptions.None
     this.instance.toneMappingExposure = this.params.exposure
 

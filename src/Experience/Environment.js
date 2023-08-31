@@ -1,4 +1,9 @@
-import * as THREE from 'three'
+import {
+  AmbientLight,
+  Color,
+  DirectionalLight,
+  EquirectangularReflectionMapping,
+} from 'three';
 import Experience from './Experience'
 
 export default class Environment {
@@ -10,7 +15,7 @@ export default class Environment {
 
     this.params = {
       backgroundColor: 0x262626,
-      blurriness: 0
+      blurriness: 0.5
     }
 
     // Wait for resources
@@ -21,15 +26,15 @@ export default class Environment {
   }
 
   setEnv = () => {
-    this.scene.add( new THREE.AmbientLight(0xffffff, 2))
-    this.scene.add( new THREE.DirectionalLight(0xffffff, 2))
+    this.scene.add( new AmbientLight(0xffffff, 2))
+    this.scene.add( new DirectionalLight(0xffffff, 2))
 
-    // backgroundColor
-    this.scene.background = new THREE.Color(this.params.backgroundColor)
-
-    // sceneTexture
+    // scene background and texture
     this.envTexture = this.resources.items.royal_esplanade
-    this.envTexture.mapping = THREE.EquirectangularReflectionMapping
+    this.envTexture.mapping = EquirectangularReflectionMapping
+    this.scene.environment = this.envTexture
+    this.scene.background = this.envTexture
+    // this.scene.background = new Color(this.params.backgroundColor)
 
     // blurries
     this.scene.backgroundBlurriness = this.params.blurriness
@@ -46,7 +51,7 @@ export default class Environment {
           this.scene.background = this.envTexture
         } else {
           this.scene.environment = null
-          this.scene.background = new THREE.Color(this.params.backgroundColor)
+          this.scene.background = new Color(this.params.backgroundColor)
         }
       },
     }

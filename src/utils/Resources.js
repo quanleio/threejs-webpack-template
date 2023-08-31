@@ -1,4 +1,4 @@
-import * as THREE from "three"
+import {CubeTextureLoader, TextureLoader} from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader'
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader'
@@ -37,7 +37,8 @@ export default class Resources extends EventEmitter {
 
     // draco
     const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath( '/vendor/draco/' )
+    dracoLoader.setDecoderConfig({type: 'js'});
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
     dracoLoader.preload()
     this.loaders.gltfLoader.setDRACOLoader( dracoLoader )
 
@@ -49,8 +50,8 @@ export default class Resources extends EventEmitter {
 
     // another loaders
     this.loaders.objLoader = new OBJLoader()
-    this.loaders.textureLoader = new THREE.TextureLoader()
-    this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
+    this.loaders.textureLoader = new TextureLoader()
+    this.loaders.cubeTextureLoader = new CubeTextureLoader()
     this.loaders.hdrLoader = new RGBELoader()
   }
 

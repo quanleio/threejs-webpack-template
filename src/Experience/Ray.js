@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import {Raycaster, Vector2} from 'three';
 import EventEmitter from '../utils/EventEmitter'
 import { EVT } from '../utils/contains';
 
@@ -8,8 +8,8 @@ export default class Ray extends EventEmitter {
 
     this.camera = camera.instance
     this.scene = scene
-    this.raycaster = new THREE.Raycaster()
-    this.pointer = new THREE.Vector2()
+    this.raycaster = new Raycaster()
+    this.pointer = new Vector2()
     this.target = this.scene
 
     window.addEventListener('touchstart', ev => {

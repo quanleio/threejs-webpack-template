@@ -1,5 +1,6 @@
 import Experience from "../Experience.js"
 import Fox from './Fox';
+
 export default class World {
   constructor() {
     this.experience = new Experience()

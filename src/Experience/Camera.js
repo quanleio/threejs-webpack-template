@@ -1,4 +1,4 @@
-import * as THREE from "three"
+import {PerspectiveCamera} from 'three';
 import Experience from "./Experience.js"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 
@@ -14,7 +14,7 @@ export default class Camera {
     this.setControls()
   }
   setInstance() {
-    this.instance = new THREE.PerspectiveCamera(
+    this.instance = new PerspectiveCamera(
       45,
       this.sizes.width / this.sizes.height,
       0.1,

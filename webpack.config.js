@@ -59,9 +59,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, "dist", "index.html"),
+      /*filename: path.resolve(__dirname, "dist", "index.html"),
       title: 'Three.js | Webpack Template',
-      hash: true,
+      hash: true,*/
+      template: "./src/index.html",
     }),
     new CopyPlugin({
       patterns: [

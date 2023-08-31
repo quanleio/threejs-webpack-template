@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import {Mesh, MeshBasicMaterial, PlaneGeometry} from 'three';
 import Experience from '../Experience';
 
 export default class PlaneToy {
@@ -9,9 +9,9 @@ export default class PlaneToy {
     this.setPlaneToy()
   }
   setPlaneToy = () => {
-    const geometry = new THREE.PlaneGeometry(1, 1, )
-    const material = new THREE.MeshBasicMaterial()
-    const plane = new THREE.Mesh(geometry, material)
+    const geometry = new PlaneGeometry(1, 1, )
+    const material = new MeshBasicMaterial()
+    const plane = new Mesh(geometry, material)
 
     plane.scale.setScalar(10)
     this.scene.add(plane)
